@@ -1,3 +1,6 @@
+# Demo
+Live demo at http://tianjara.net/govhack15-sw-vis
+
 # Instructions
 
 1. Download password protected Sydney Water Excel source data from URL provided at GovHack event.
