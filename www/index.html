@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<!--
+  This file is licenced CC0 http://creativecommons.org/publicdomain/zero/1.0/
+-->
+<head>
+        <title>Sydney Water Data Vis</title>
+
+        <!-- support for mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="/javascript/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/javascript/fonts-font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="/javascript/leaflet/leaflet.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="/javascript/leafelt/leaflet.ie.css" /><![endif]-->
+
+        <link rel="stylesheet" href="jQRangeSlider/css/classic.css" />
+
+        <!-- scripts -->
+        <script src="/javascript/jquery/jquery.min.js"></script>
+
+        <script src="jQRangeSlider/jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script src="jQRangeSlider/jQDateRangeSlider-min.js"></script>
+
+        <script src="/javascript/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="/javascript/leaflet/leaflet.js"></script>
+
+        <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+        <!-- full screen map, no chrome -->
+        <style>
+                /* full screen */
+                body {
+                    padding: 0;
+                    margin: 0;
+                }
+                /*html, body, */
+                #map {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    /*height: calc(100% - 20px);*/
+                }
+
+                /* Disclaimer Modal */
+                /*
+                #disclaimer_overlay {
+                    position: fixed;
+                    z-index:100;
+                    top: 0px;
+                    left: 0px;
+                    height:100%;
+                    width:100%;
+                    background: #000;
+                    display: none;
+                }
+                */
+
+        </style>
+</head>
+<body>
+    <!--<div id="dateslider"></div>-->
+        <div id="map"></div>
+        <script src="map.js"></script>
+</body>
+</html>
