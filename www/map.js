@@ -49,15 +49,67 @@ function getColor(d) {
                     blues[0] ;
 }
 
-var consumption_pp = L.geoJson(null, {
-    style: function (feature) {
-        return {
-            fillColor: getColor(feature.properties.cpp_2013),
-            weight: 1,
-            opacity: 1,
-            color: 'white',
-            fillOpacity: 0.7
-        };
+/* for each feature from the GeoJSON do some extra tasks */
+function onEachFeature(feature, layer) {
+    /* highlight feature on highlight */
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight
+    });
+}
+
+function resetHighlight(e) {
+    if (consumption_pp) {
+        consumption_pp.resetStyle(e.target);
     }
+
+    info.update();
+}
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    info.update(layer.feature.properties);
+
+    var highlightStyle = polygonStyle(layer.feature);
+
+    highlightStyle.weight = 2;
+    highlightStyle.color = 'black';
+    layer.bringToFront();
+
+    layer.setStyle(highlightStyle);
+}
+
+function polygonStyle(feature) {
+    return {
+        fillColor: feature.properties.cpp_2013 ? getColor(feature.properties.cpp_2013) : 'white',
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+    };
+}
+
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = props ?
+        '<h1>' + props.lga_name  + '</h1>' + '<br>' +
+        '' + parseFloat(props.cpp_2012).toFixed(2) + ', ' + parseFloat(props.cpp_2013).toFixed(2)
+        : 'Hover over a state';
+};
+
+info.addTo(map);
+
+var consumption_pp = L.geoJson(null, {
+    style: polygonStyle,
+   onEachFeature: onEachFeature
 });
 var lga = omnivore.topojson('data/sw_consumption_pp.topo.json', null, consumption_pp).addTo(map);
